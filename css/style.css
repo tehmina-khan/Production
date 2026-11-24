@@ -229,103 +229,152 @@ p{color:var(--muted)}
 }
 
 /* Footer */
+.site-footer{
+  background:var(--bg);
+  color:var(--black);
+  border-top:1px solid var(--line);
+  padding:5rem 0 2.5rem;
+}
+
+/* Top 4 Columns (Logo wider on left, 3 evenly distributed columns on right) */
+.footer-top{
+  display:grid;
+  grid-template-columns:2.1fr 1fr 1fr 1.25fr;
+  gap:3rem;
+  align-items:start;
+}
 .footer-logo{
   display:inline-block;
-  margin-bottom:1.4rem;
+  margin-bottom:1.25rem;
 }
 .footer-logo img{
   height:100px;
   width:auto;
   display:block;
 }
-.site-footer{
-  background:var(--bg);
-  color:var(--black);
-  border-top:4px solid var(--yellow);
-  padding:4.5rem 0 2rem;
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:1.25fr 1fr;
-  gap:4rem;
-  align-items:start;
-}
 .footer-desc{
   color:var(--muted);
-  max-width:460px;
-  font-size:.98rem;
+  font-size:.94rem;
+  font-weight:400;
   line-height:1.7;
-  margin-bottom:1.4rem;
+  max-width:340px;
 }
-.footer-pill{
+
+.site-footer h4{
+  color:var(--black);
+  font-size:.95rem;
+  font-weight:500;
+  letter-spacing:0;
+  text-transform:none;
+  margin-bottom:1.25rem;
+}
+.footer-col a,
+.footer-address{
+  display:block;
+  width:fit-content;
+  color:var(--muted);
+  font-size:.92rem;
+  font-weight:400;
+  line-height:1.65;
+  margin-bottom:.65rem;
+  transition:color .25s ease;
+}
+.footer-col a:hover{
+  color:var(--black);
+}
+.footer-contact-col .footer-address{
+  margin-bottom:1.35rem;
+}
+.footer-contact-col .footer-spaced{
+  margin-bottom:1.15rem;
+}
+
+/* Middle 3 Columns: Call us, Email us, Follow */
+.footer-mid{
+  margin-top:4.25rem;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:end;
+  gap:2rem;
+}
+.footer-label{
+  display:block;
+  color:var(--muted);
+  font-size:.82rem;
+  font-weight:400;
+  margin-bottom:.55rem;
+}
+.footer-big-link{
   display:inline-block;
-  padding:.55rem 1.25rem;
-  border-radius:999px;
-  background:var(--alt);
+  color:var(--black);
+  font-size:clamp(1.15rem, 2vw, 1.4rem);
+  font-weight:400;
+  letter-spacing:-.01em;
+  transition:color .25s ease;
+}
+.footer-big-link:hover{
+  color:var(--accent);
+}
+.footer-follow{
+  justify-self:end;
+}
+.footer-circles{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+}
+.footer-circles a{
+  width:40px;
+  height:40px;
+  border-radius:50%;
   border:1px solid var(--line);
   color:var(--black);
-  font-size:.78rem;
-  font-weight:600;
-  letter-spacing:.08em;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.03em;
+  display:grid;
+  place-items:center;
+  transition:background .25s ease, border-color .25s ease, transform .25s var(--ease);
 }
-.footer-office{margin-top:2.4rem}
-.site-footer h4{
-  color:var(--accent);
-  font-size:.88rem;
-  font-weight:600;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  margin-bottom:1rem;
-}
-.footer-office p{
-  color:var(--black);
-  font-size:.95rem;
-  margin-bottom:.75rem;
-}
-.footer-phone{
-  display:inline-block;
-  font-weight:600;
-  font-size:1.05rem;
-  color:var(--black);
-  margin-bottom:.45rem;
-  transition:color .3s;
-}
-.footer-phone:hover{color:var(--accent)}
-.footer-link,.footer-domain{
-  display:block;
-  width:fit-content;
-  font-size:.95rem;
-  margin-bottom:.35rem;
-  transition:color .3s,transform .3s;
-}
-.footer-link{color:var(--black)}
-.footer-domain{color:var(--muted)}
-.footer-link:hover,.footer-domain:hover{color:var(--accent);transform:translateX(4px)}
-
-.footer-nav a{
-  display:block;
-  width:fit-content;
-  color:var(--black);
-  font-size:.98rem;
-  margin-bottom:.75rem;
-  transition:color .3s,transform .3s;
-}
-.footer-nav a:hover{
-  color:var(--accent);
-  transform:translateX(4px);
+.footer-circles a:hover{
+  background:var(--yellow);
+  border-color:var(--yellow);
+  transform:translateY(-2px);
 }
 
+/* Bottom Centered Copyright */
 .copyright{
-  margin-top:3.5rem;
-  padding-top:1.5rem;
+  margin-top:3.25rem;
+  padding-top:2rem;
   border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-  font-size:.85rem;
+  text-align:center;
+  font-size:.84rem;
+  font-weight:400;
   color:var(--muted);
+}
+
+/* Responsive */
+@media(max-width:960px){
+  .footer-top{
+    grid-template-columns:1fr 1fr;
+    gap:2.5rem 2rem;
+  }
+  .footer-brand{
+    grid-column:1 / -1;
+  }
+  .footer-mid{
+    grid-template-columns:1fr;
+    gap:1.75rem;
+  }
+  .footer-follow{
+    justify-self:start;
+  }
+}
+@media(max-width:560px){
+  .footer-top{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
 }
 
 /* Floating WhatsApp Button */
