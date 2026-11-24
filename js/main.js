@@ -109,3 +109,19 @@ if (feed) {
       feed.innerHTML = '<p>Follow us on Instagram to see our latest projects.</p>';
     });
 }
+
+// Hide navbar smoothly when footer is in view; bring back when scrolling up
+const footerEl = document.querySelector('.site-footer');
+if (header && footerEl) {
+  const footerNavObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      header.classList.toggle('hidden', entry.isIntersecting);
+      if (entry.isIntersecting && links && toggle) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }, { threshold: 0.08 });
+
+  footerNavObserver.observe(footerEl);
+}
