@@ -110,6 +110,38 @@ if (feed) {
     });
 }
 
+// CLIENT FEEDBACK
+// Stacked Google Review Cards (< > Navigation)
+const reviewCards = [...document.querySelectorAll('.review-card')];
+if (reviewCards.length) {
+  let current = 0;
+  const counterEl = document.getElementById('review-current');
+  const prevBtn = document.querySelector('.review-nav.prev');
+  const nextBtn = document.querySelector('.review-nav.next');
+  const sheet1 = document.querySelector('.sheet-1');
+  const sheet2 = document.querySelector('.sheet-2');
+
+  const showReview = (index) => {
+    current = (index + reviewCards.length) % reviewCards.length;
+    reviewCards.forEach((card, i) => card.classList.toggle('active', i === current));
+    if (counterEl) counterEl.textContent = current + 1;
+
+    // Subtle paper-shuffle tilt on background sheets
+    const dir = current % 2 === 0 ? 1 : -1;
+    if (sheet1) sheet1.style.transform = `translate(${10 * dir}px, 12px) rotate(${-1.2 * dir}deg)`;
+    if (sheet2) sheet2.style.transform = `translate(${-6 * dir}px, 22px) rotate(${1.4 * dir}deg)`;
+  };
+
+  prevBtn?.addEventListener('click', () => showReview(current - 1));
+  nextBtn?.addEventListener('click', () => showReview(current + 1));
+
+  // Keyboard arrow support when focused inside the review section
+  document.getElementById('reviews')?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') showReview(current - 1);
+    if (e.key === 'ArrowRight') showReview(current + 1);
+  });
+}
+
 // Hide navbar smoothly when footer is in view; bring back when scrolling up
 const footerEl = document.querySelector('.site-footer');
 if (header && footerEl) {
