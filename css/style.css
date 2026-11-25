@@ -60,6 +60,22 @@ p{color:var(--muted)}
 .nav-toggle span:last-child{top:19px}
 .nav-toggle[aria-expanded="true"] span:first-child{top:15px;transform:rotate(45deg)}
 .nav-toggle[aria-expanded="true"] span:last-child{top:15px;transform:rotate(-45deg)}
+@media(max-width:768px){
+  .nav{
+    display:flex;
+    justify-content:space-between;
+  }
+  .nav-cta{
+    display:none;
+  }
+  .nav-cta-mobile{
+    display:inline-flex;
+    margin-top:.5rem;
+  }
+  .nav-toggle{
+    display:block;
+  }
+}
 
 /* Hero */
 .hero{padding:0.5rem 0 5rem}
