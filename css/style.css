@@ -1,5 +1,5 @@
 :root{
-  --yellow:#ffcb1b; --black:#111111; --accent:#661F07;
+  --yellow:#ffcb1b; --black:#111111; --accent:#ffcb1b;
   --bg:#ffffff; --alt:#f7f5ef; --muted:#6a6a64; --line:#e9e6dc;
   --radius:16px; --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -23,7 +23,7 @@ h2{font-size:clamp(1.8rem,3.5vw,2.6rem)}
 h3{font-size:1.25rem}
 p{color:var(--muted)}
 .lead{font-size:1.15rem;max-width:520px;margin:1.2rem 0 2rem}
-.eyebrow{display:inline-block;font-size:.85rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.eyebrow{display:inline-block;font-size:.85rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 
 /* Buttons */
 .btn{display:inline-block;padding:.85rem 1.6rem;border-radius:999px;font-weight:500;font-size:.95rem;transition:transform .3s var(--ease),background .3s,box-shadow .3s,color .3s}
