@@ -1,5 +1,3 @@
-
-
 // Hero Calendar-Flip Words (2-second cycle) STARTS HERE
 const flipWords = [...document.querySelectorAll('.calendar-flip .flip-word')];
 if (flipWords.length > 1) {
