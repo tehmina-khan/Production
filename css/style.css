@@ -97,7 +97,7 @@ p{color:var(--muted)}
 .icon{width:44px;height:44px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-weight:500;margin-bottom:1.2rem}
 
 /* Service Cards & Read... Link */
-.service-container{display:grid}
+.service-container{display:grid; padding:0 3rem}
 .service-card{display:flex;flex-direction:column;align-items:flex-start}
 .service-list{list-style:none;margin:.4rem 0 1.5rem;display:grid;gap:.45rem;color:var(--muted);font-size:.95rem;line-height:1.5}
 .service-list li{position:relative;padding-left:1.1rem}
@@ -161,13 +161,125 @@ p{color:var(--muted)}
 }
 
 
-/* Projects */
-.grid-projects{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.project{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:4/3;background:#ddd}
-.project img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
-.project:hover img{transform:scale(1.07)}
-.project figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.2rem;color:#fff;font-weight:500;background:linear-gradient(transparent,rgba(0,0,0,.65));transform:translateY(8px);opacity:.9;transition:.4s var(--ease)}
-.project:hover figcaption{transform:none;opacity:1}
+/* Projects (3-Column Portrait 3D Flip Cards) */
+.grid-projects{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:1.5rem;
+  max-width:1040px;
+  margin:0 auto;
+}
+.project-flip{
+  grid-column:span 2;
+  perspective:1200px;
+  aspect-ratio:3/4; /* Portrait orientation */
+  cursor:pointer;
+  outline:none;
+}
+/* Center the 4th project card on the second row */
+.project-flip:last-child:nth-child(3n + 1){
+  grid-column:3 / span 2;
+}
+
+.project-flip-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transition:transform .75s cubic-bezier(.22,1,.36,1);
+  transform-style:preserve-3d;
+}
+
+.project-flip:hover .project-flip-inner,
+.project-flip:focus-visible .project-flip-inner,
+.project-flip.flipped .project-flip-inner{
+  transform:rotateY(180deg);
+}
+
+.project-front,
+.project-back{
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  overflow:hidden;
+}
+
+/* Front: Photo + Title Overlay */
+.project-front{
+  background:#ddd;
+}
+.project-front img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.project-front-title{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:1.2rem 1.25rem;
+  color:#ffffff;
+  font-size:1rem;
+  font-weight:500;
+  background:linear-gradient(transparent,rgba(0,0,0,.7));
+}
+
+/* Back: Solid Brand Yellow Block (#ffcb1b) */
+.project-back{
+  background:var(--yellow);
+  color:var(--black);
+  transform:rotateY(180deg);
+  padding:1.35rem 1.25rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  box-shadow:0 16px 36px rgba(0,0,0,.08);
+  overflow-y:auto;
+}
+.project-back h3{
+  font-size:1.05rem;
+  font-weight:600;
+  color:var(--black);
+  margin-bottom:.35rem;
+  line-height:1.25;
+}
+.project-meta{
+  font-size:.8rem;
+  color:var(--black);
+  margin-bottom:.6rem;
+}
+.project-meta strong{
+  font-weight:600;
+}
+.project-desc{
+  font-size:.82rem;
+  line-height:1.48;
+  color:var(--black);
+}
+
+/* Tablet: 2 cards per row */
+@media(max-width:900px){
+  .grid-projects{
+    grid-template-columns:repeat(2,1fr);
+    max-width:680px;
+  }
+  .project-flip,
+  .project-flip:last-child:nth-child(3n + 1){
+    grid-column:span 1;
+  }
+}
+
+/* Mobile: 1 portrait card per row */
+@media(max-width:580px){
+  .grid-projects{
+    grid-template-columns:1fr;
+    max-width:340px;
+  }
+}
 
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}

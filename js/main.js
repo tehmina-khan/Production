@@ -110,6 +110,13 @@ if (feed) {
     });
 }
 
+// Project Flip Cards (Click / Tap Support)
+document.querySelectorAll('.project-flip').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+});
+
 // CLIENT FEEDBACK
 // Stacked Google Review Cards (< > Navigation)
 const reviewCards = [...document.querySelectorAll('.review-card')];
