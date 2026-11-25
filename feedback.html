@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Brand | Home Renovation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="logo"><img src="images/logo-for-web.png" alt="Aistibaqi Technical Services Logo" style="width: 50%; height: auto;"></a>
+
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="contact.html">Contact</a>
+      <a href="files/company-profile.pdf" target="_blank" rel="noopener">Company Profile</a>
+      <a href="contact.html" class="btn btn-yellow nav-cta-mobile">Free Consultation</a>
+    </nav>
+
+    <a href="contact.html" class="btn btn-yellow nav-cta">Free Consultation</a>
+
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow reveal">Feedback</span>
+      <h1 class="reveal" style="--d:.1s">What clients say, and what we're up to.</h1>
+    </div>
+  </section>
+
+  <!-- Live social feed -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Latest from Instagram</span>
+        <h2>Fresh off the job site</h2>
+      </div>
+      <div id="social-feed" class="feed" data-endpoint="/.netlify/functions/instagram">
+        <!-- filled by main.js -->
+      </div>
+      <p class="center"><a class="btn btn-ghost" href="https://instagram.com/yourhandle" target="_blank" rel="noopener">Follow on Instagram</a></p>
+    </div>
+  </section>
+
+  <!-- Facebook Page plugin -->
+  <section class="section alt">
+    <div class="container split">
+      <div class="reveal">
+        <h2>Follow us on Facebook</h2>
+        <p>Project updates, before-and-afters and client reviews.</p>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <iframe
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FYOURPAGE&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=true"
+          width="100%" height="600" style="border:0;border-radius:16px" loading="lazy"
+          allow="encrypted-media" title="Facebook feed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leave feedback -->
+  <section class="section">
+    <div class="container narrow">
+      <div class="section-head reveal"><h2>Leave us your feedback</h2></div>
+      <form class="form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label>Name<input type="text" name="name" required></label>
+        <label>Rating
+          <select name="rating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+        </label>
+        <label>Your experience<textarea name="message" rows="5" required></textarea></label>
+        <button class="btn btn-yellow" type="submit">Submit feedback</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="index.html" class="logo light">Your<span>Brand</span></a>
+      <p>Thoughtful kitchen, bathroom and whole-home renovations.</p>
+    </div>
+    <div>
+      <h4>Pages</h4>
+      <a href="index.html">Home</a><a href="about.html">About</a>
+      <a href="feedback.html">Feedback</a><a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>hello@yourbrand.com<br>+00 000 0000000</p>
+      <div class="socials">
+        <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com/yourpage" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="container copyright">© <span id="year"></span> Your Brand. All rights reserved.</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -74,6 +74,48 @@ p{color:var(--muted)}
 .float{animation:float 5s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-10px)}}
 
+/* Hero Calendar-Flip Eyebrow  STARTS HERE*/
+.hero-serve{
+  display:inline-flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:.42rem;
+}
+.calendar-flip{
+  position:relative;
+  display:inline-grid;
+  perspective:600px;
+  vertical-align:bottom;
+}
+.flip-word{
+  grid-area:1 / 1;
+  display:inline-block;
+  font-weight:600;
+  color:var(--black);
+  padding-bottom:1px;
+  transform-origin:50% 85%;
+  backface-visibility:hidden;
+  opacity:0;
+  transform:rotateX(-85deg) translateY(6px);
+  transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    opacity .35s ease;
+  pointer-events:none;
+}
+
+/* Current active word resting flat */
+.flip-word.active{
+  opacity:1;
+  transform:rotateX(0deg) translateY(0);
+  pointer-events:auto;
+}
+
+/* Outgoing word flipping upward like a calendar page */
+.flip-word.exit{
+  opacity:0;
+  transform:rotateX(85deg) translateY(-6px);
+}
+/* Hero Calendar-Flip Eyebrow  ENDS HERE*/
 
 /* Hero Stats Bar */
 .hero-stats{padding:2.5rem 0 3.5rem}
