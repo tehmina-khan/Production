@@ -24,7 +24,7 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(e.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.05 });
 const observeReveals = () =>
   document.querySelectorAll('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
 observeReveals();
@@ -157,5 +157,6 @@ if (header && footerEl) {
 
   footerNavObserver.observe(footerEl);
 }
+
 
 
