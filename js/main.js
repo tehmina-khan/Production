@@ -1,4 +1,34 @@
 
+
+// Hero Calendar-Flip Words (2-second cycle) STARTS HERE
+const flipWords = [...document.querySelectorAll('.calendar-flip .flip-word')];
+if (flipWords.length > 1) {
+  let wordIndex = 0;
+
+  setInterval(() => {
+    const currentWord = flipWords[wordIndex];
+    const nextIndex = (wordIndex + 1) % flipWords.length;
+    const nextWord = flipWords[nextIndex];
+
+    // Flip current word upward out
+    currentWord.classList.remove('active');
+    currentWord.classList.add('exit');
+
+    // Reset next word to bottom-ready position before flipping in
+    nextWord.classList.remove('exit');
+    void nextWord.offsetWidth; // force reflow so upward entrance always plays cleanly
+    nextWord.classList.add('active');
+
+    // Clean up exit state after transition completes
+    setTimeout(() => {
+      currentWord.classList.remove('exit');
+    }, 600);
+
+    wordIndex = nextIndex;
+  }, 1500);
+}
+// Hero Calendar-Flip Words (2-second cycle) ENDS HERE
+
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 

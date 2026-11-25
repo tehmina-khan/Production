@@ -31,7 +31,7 @@ p{color:var(--muted)}
 .btn-yellow{background:var(--yellow);color:var(--black)}
 .btn-yellow:hover{box-shadow:0 10px 24px rgba(255,203,27,.45)}
 .btn-black{background:var(--black);color:#fff}
-.btn-black:hover{background:var(--accent)}
+.btn-black:hover{background:var(--muted)}
 .btn-ghost{border:1.5px solid var(--black)}
 .btn-ghost:hover{background:var(--black);color:#fff}
 .actions{display:flex;gap:1rem;flex-wrap:wrap}
