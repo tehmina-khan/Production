@@ -371,3 +371,83 @@ if (bookingForm) {
     window.open(waUrl, '_blank', 'noopener');
   });
 }
+
+
+// =========================================================
+// WHATSAPP HANDLERS: contact.html vs. call.html
+// (Leaves book.html completely untouched)
+// =========================================================
+const setupSimpleWhatsAppForm = ({ formId, alertId, subject, priorityNote }) => {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  const alertEl = document.getElementById(alertId);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (alertEl) alertEl.textContent = '';
+
+    // Validate required fields
+    const requiredFields = [...form.querySelectorAll('[required]')];
+    let firstInvalid = null;
+
+    requiredFields.forEach((field) => {
+      const isEmpty = !field.value.trim() || field.value.trim() === '+971';
+      field.classList.toggle('invalid', isEmpty);
+      if (isEmpty && !firstInvalid) firstInvalid = field;
+    });
+
+    if (firstInvalid) {
+      if (alertEl) {
+        alertEl.textContent = 'Please fill in all required fields before continuing.';
+      }
+      firstInvalid.focus();
+      return;
+    }
+
+    // Collect filled fields dynamically from the form
+    const lines = [
+      `*${subject}*`,
+      `_${priorityNote}_`,
+      '────────────────────',
+      ''
+    ];
+
+    const controls = [...form.querySelectorAll('input, select, textarea')];
+    controls.forEach((el) => {
+      if (el.type === 'submit' || el.type === 'button' || el.type === 'hidden') return;
+      const val = el.value.trim();
+      if (!val || val === '+971') return;
+
+      // Derive a clean label from <label>, name, or placeholder
+      const labelEl = el.id ? form.querySelector(`label[for="${el.id}"]`) : null;
+      const rawLabel =
+        (labelEl && labelEl.textContent.replace('*', '').trim()) ||
+        el.getAttribute('name') ||
+        el.getAttribute('placeholder') ||
+        'Details';
+
+      const formattedLabel = rawLabel.charAt(0).toUpperCase() + rawLabel.slice(1);
+      lines.push(`*${formattedLabel}:* ${val}`);
+    });
+
+    const waUrl = `https://wa.me/971527689121?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(waUrl, '_blank', 'noopener');
+  });
+};
+
+// 1. contact.html -> General Contact Inquiry
+setupSimpleWhatsAppForm({
+  formId: 'contact-form',
+  alertId: 'contact-alert',
+  subject: '📩 GENERAL CONTACT INQUIRY — AISTIBAQI',
+  priorityNote: 'Submitted via Contact Page'
+});
+
+// 2. call.html -> High-Priority Call Request
+setupSimpleWhatsAppForm({
+  formId: 'call-form',
+  alertId: 'call-alert',
+  subject: '📞 PRIORITY CALL REQUEST — AISTIBAQI',
+  priorityNote: 'High-Priority Request via Book a Call Page'
+});

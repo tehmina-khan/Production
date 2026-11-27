@@ -43,7 +43,7 @@
 
   <section class="section">
     <div class="container split">
-      <form class="form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="form reveal" id="call-form" novalidate>
         <label>*Name<input type="text" name="name" placeholder="Full name" required></label>
         <label>Email<input type="email" name="email" placeholder="Email address"></label>
         <label>*Phone<input type="tel" name="phone" placeholder="Phone number" required></label>
@@ -57,6 +57,7 @@
           </select>
         </label>
         <label>Tell us something about it (Optional)<textarea name="message" rows="5" placeholder="Please provide more details about your project..."></textarea></label>
+        <p class="form-alert" id="call-alert" role="alert" aria-live="polite"></p>
         <button class="btn btn-yellow" type="submit">Book the Call Now</button>
       </form>
 
