@@ -27,6 +27,80 @@ if (flipWords.length > 1) {
 }
 // Hero Calendar-Flip Words (2-second cycle) ENDS HERE
 
+
+// Hero 5-Image Slider (Horizontal Sliding Track)
+const heroSlider = document.querySelector('.hero-slider');
+if (heroSlider) {
+  const track = heroSlider.querySelector('.hero-slides');
+  const slides = [...heroSlider.querySelectorAll('.hero-slide')];
+  const dots = [...heroSlider.querySelectorAll('.hero-dot')];
+  const prevBtn = heroSlider.querySelector('.hero-slider-btn.prev');
+  const nextBtn = heroSlider.querySelector('.hero-slider-btn.next');
+  let slideIdx = 0;
+  let slideTimer = null;
+
+  const goToSlide = (index) => {
+    slideIdx = (index + slides.length) % slides.length;
+    if (track) {
+      track.style.transform = `translateX(-${slideIdx * 100}%)`;
+    }
+    slides.forEach((img, i) => img.classList.toggle('active', i === slideIdx));
+    dots.forEach((dot, i) => {
+      const isActive = i === slideIdx;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-selected', isActive);
+    });
+  };
+
+  const startAutoSlide = () => {
+    stopAutoSlide();
+    slideTimer = setInterval(() => goToSlide(slideIdx + 1), 2500);
+  };
+
+  const stopAutoSlide = () => {
+    if (slideTimer) clearInterval(slideTimer);
+  };
+
+  prevBtn?.addEventListener('click', () => {
+    goToSlide(slideIdx - 1);
+    startAutoSlide();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    goToSlide(slideIdx + 1);
+    startAutoSlide();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToSlide(i);
+      startAutoSlide();
+    });
+  });
+
+  // Pause on hover
+  heroSlider.addEventListener('mouseenter', stopAutoSlide);
+  heroSlider.addEventListener('mouseleave', startAutoSlide);
+
+  // Touch swipe support on mobile
+  let touchStartX = 0;
+  heroSlider.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAutoSlide();
+  }, { passive: true });
+
+  heroSlider.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      goToSlide(diff < 0 ? slideIdx + 1 : slideIdx - 1);
+    }
+    startAutoSlide();
+  }, { passive: true });
+
+  startAutoSlide();
+}
+// HERO SLIDER ENDS HERE
+
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -195,3 +269,105 @@ if (header && footerEl) {
 
 
 
+// Booking Page: Live Summary, URL Pre-fill & Structured WhatsApp Request
+const bookingForm = document.getElementById('booking-form');
+if (bookingForm) {
+  const serviceEl = document.getElementById('bk-service');
+  const optionEl = document.getElementById('bk-option');
+  const qtyEl = document.getElementById('bk-qty');
+  const propertyEl = document.getElementById('bk-property');
+  const nameEl = document.getElementById('bk-name');
+  const phoneEl = document.getElementById('bk-phone');
+  const emailEl = document.getElementById('bk-email');
+  const locationEl = document.getElementById('bk-location');
+  const dateEl = document.getElementById('bk-date');
+  const timeEl = document.getElementById('bk-time');
+  const notesEl = document.getElementById('bk-notes');
+  const agreeEl = document.getElementById('bk-agree');
+  const alertEl = document.getElementById('booking-alert');
+
+  // Prevent selecting past dates
+  if (dateEl) {
+    const today = new Date().toISOString().split('T')[0];
+    dateEl.setAttribute('min', today);
+  }
+
+  // Pre-select service if passed from another page (?service=...)
+  const params = new URLSearchParams(window.location.search);
+  const preselectedService = params.get('service');
+  if (preselectedService && serviceEl) {
+    const match = [...serviceEl.options].find(
+      opt => opt.value.toLowerCase() === preselectedService.toLowerCase()
+    );
+    if (match) serviceEl.value = match.value;
+  }
+
+  // Live sidebar summary updates
+  const syncSummary = () => {
+    const sumService = document.getElementById('sum-service');
+    const sumProperty = document.getElementById('sum-property');
+    const sumLocation = document.getElementById('sum-location');
+    const sumSchedule = document.getElementById('sum-schedule');
+
+    if (sumService) sumService.textContent = serviceEl.value || 'Not selected yet';
+    if (sumProperty) {
+      const qtyText = qtyEl.value.trim() ? ` (${qtyEl.value.trim()})` : '';
+      sumProperty.textContent = propertyEl.value ? `${propertyEl.value}${qtyText}` : 'Not selected yet';
+    }
+    if (sumLocation) sumLocation.textContent = locationEl.value.trim() || '—';
+    if (sumSchedule) {
+      const parts = [dateEl.value, timeEl.value].filter(Boolean);
+      sumSchedule.textContent = parts.length ? parts.join(' · ') : '—';
+    }
+  };
+
+  bookingForm.addEventListener('input', syncSummary);
+  bookingForm.addEventListener('change', syncSummary);
+  syncSummary();
+
+  // Validate & open structured WhatsApp message
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alertEl.textContent = '';
+
+    const requiredFields = [serviceEl, propertyEl, nameEl, phoneEl, locationEl, dateEl, timeEl];
+    let firstInvalid = null;
+
+    requiredFields.forEach(field => {
+      const empty = !field.value.trim() || field.value.trim() === '+971';
+      field.classList.toggle('invalid', empty);
+      if (empty && !firstInvalid) firstInvalid = field;
+    });
+
+    if (firstInvalid) {
+      alertEl.textContent = 'Please complete all required fields marked with * before continuing.';
+      firstInvalid.focus();
+      return;
+    }
+
+    if (!agreeEl.checked) {
+      alertEl.textContent = 'Please tick the confirmation checkbox to prepare your WhatsApp booking request.';
+      agreeEl.focus();
+      return;
+    }
+
+    const lines = [
+      '*NEW SERVICE BOOKING REQUEST — AISTIBAQI*',
+      '',
+      `*Service:* ${serviceEl.value}`,
+      `*Service Option:* ${optionEl.value}`,
+      qtyEl.value.trim() ? `*Quantity / Units:* ${qtyEl.value.trim()}` : null,
+      `*Property Type:* ${propertyEl.value}`,
+      `*Customer Name:* ${nameEl.value.trim()}`,
+      `*Mobile Number:* ${phoneEl.value.trim()}`,
+      emailEl.value.trim() ? `*Email:* ${emailEl.value.trim()}` : null,
+      `*Dubai Location:* ${locationEl.value.trim()}`,
+      `*Preferred Date:* ${dateEl.value}`,
+      `*Preferred Time:* ${timeEl.value}`,
+      notesEl.value.trim() ? `*Additional Notes:* ${notesEl.value.trim()}` : null
+    ].filter(Boolean);
+
+    const waUrl = `https://wa.me/971527689121?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(waUrl, '_blank', 'noopener');
+  });
+}

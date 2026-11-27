@@ -22,10 +22,11 @@
       <a href="about.html">About</a>
       <a href="index.html#reviews">Feedback</a>
       <a href="contact.html">Contact</a>
-      <a href="files/company-profile.pdf" target="_blank" rel="noopener" class="btn btn-yellow nav-cta-mobile">Company Profile</a>
+      <a href="files/company-profile.pdf" target="_blank" rel="noopener">Company Profile</a>
+      <a href="booking.html"  class="btn btn-yellow nav-cta-mobile">Book a Service</a>
     </nav>
 
-    <a href="files/company-profile.pdf" target="_blank" rel="noopener" class="btn btn-yellow nav-cta">Company Profile</a>
+      <a href="booking.html" class="btn btn-yellow nav-cta"> Book a Service </a>
 
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -49,12 +50,33 @@
         <h1 class="reveal" style="--d:.1s">Professional maintenance & renovation solutions for residential and commercial spaces across Dubai.</h1>
         <p class="lead reveal" style="--d:.2s">We plan, build and finish renovations with careful craft and honest communication from the first sketch to the final walkthrough.</p>
         <div class="actions reveal" style="--d:.3s">
-          <a href="contact.html" class="btn btn-yellow">Book a free consultation</a>
+          <a href="booking.html" class="btn btn-yellow">Get a Free Quote</a>
           <a href="#work" class="btn btn-ghost">See our work</a>
         </div>
       </div>
       <div class="hero-media reveal" style="--d:.2s">
-        <img src="images/hero2.jpeg" alt="Renovated living room">
+        <div class="hero-media reveal" style="--d:.12s">
+          <div class="hero-slider" aria-roledescription="carousel" aria-label="Featured renovation and maintenance projects">
+            <div class="hero-slides">
+              <img src="images/hero-1.jpg" alt="Modern kitchen and home renovation in Dubai" class="hero-slide active">
+              <img src="images/hero-2.jpg" alt="Luxury bathroom remodeling and tiling" class="hero-slide">
+              <img src="images/hero-3.jpg" alt="Rotary AC duct cleaning and HVAC maintenance" class="hero-slide">
+              <img src="images/hero-4.jpg" alt="Commercial fit-out and interior painting" class="hero-slide">
+              <img src="images/hero-5.jpg" alt="Villa exterior waterproofing and masonry work" class="hero-slide">
+            </div>
+
+            <button type="button" class="hero-slider-btn prev" aria-label="Previous image"><</button>
+            <button type="button" class="hero-slider-btn next" aria-label="Next image">></button>
+
+            <div class="hero-dots" role="tablist" aria-label="Choose hero slide">
+              <button type="button" class="hero-dot active" data-slide="0" aria-label="Slide 1" aria-selected="true"></button>
+              <button type="button" class="hero-dot" data-slide="1" aria-label="Slide 2" aria-selected="false"></button>
+              <button type="button" class="hero-dot" data-slide="2" aria-label="Slide 3" aria-selected="false"></button>
+              <button type="button" class="hero-dot" data-slide="3" aria-label="Slide 4" aria-selected="false"></button>
+              <button type="button" class="hero-dot" data-slide="4" aria-label="Slide 5" aria-selected="false"></button>
+            </div>
+          </div>
+        </div>
         <div class="badge float"><strong>6+</strong><span>years of experience</span></div>
       </div>
     </div>
@@ -215,7 +237,7 @@
   <section class="clients-section">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">B2B</span>
+        <!-- <span class="eyebrow">B2B</span> -->
         <h2>Our Clients</h2>
       </div>
     </div>
@@ -234,6 +256,8 @@
         <div class="client-logo"><img src="images/client-10.jpg" alt="Client 10"></div>
         <div class="client-logo"><img src="images/client-11.jpg" alt="Client 11"></div>
         <div class="client-logo"><img src="images/client-12.jpg" alt="Client 12"></div>
+        <div class="client-logo"><img src="images/client-13.jpg" alt="Client 13"></div>
+        <div class="client-logo"><img src="images/client-14.jpg" alt="Client 14"></div>
 
         
         <!-- Duplicate set for seamless infinite scrolling (keep matching the first set) -->
@@ -249,6 +273,8 @@
         <div class="client-logo" aria-hidden="true"><img src="images/client-10.jpg" alt=""></div>
         <div class="client-logo" aria-hidden="true"><img src="images/client-11.jpg" alt=""></div>
         <div class="client-logo" aria-hidden="true"><img src="images/client-12.jpg" alt=""></div>
+        <div class="client-logo" aria-hidden="true"><img src="images/client-13.jpg" alt=""></div>
+        <div class="client-logo" aria-hidden="true"><img src="images/client-14.jpg" alt=""></div>
       </div>
     </div>
   </section>
@@ -262,15 +288,15 @@
       </div>
       <div class="grid-projects">
         <!-- Project 1: Roof Waterproofing -->
-        <article class="project-flip reveal" style="--d:.3s" tabindex="0" aria-label="Roof Waterproofing – Al Jaber">
+        <article class="project-flip reveal" style="--d:.3s" tabindex="0" aria-label="Roof Waterproofing –  Al Barsha, Dubai">
           <div class="project-flip-inner">
             <div class="project-front">
-              <img src="images/project-waterproofing.png" alt="Roof Waterproofing for Al Jaber">
+              <img src="images/project-waterproofing.png" alt="Roof Waterproofing for  Al Barsha, Dubai">
               <span class="project-front-title">Roof Waterproofing</span>
             </div>
             <div class="project-back">
               <h3>Roof Waterproofing</h3>
-              <p class="project-meta"><strong>Client:</strong> Al Jaber</p>
+              <p class="project-meta"><strong>Location:</strong>Al Barsha, Dubai</p>
               <p class="project-desc">Aistibaqi Technical Services carried out rooftop waterproofing works for Al Jaber, applying a high-quality protective waterproof coating to prevent water seepage and moisture penetration. Our team focused on proper surface preparation, waterproofing application, and sealing of critical areas to ensure long-lasting protection and structural durability.</p>
             </div>
           </div>
@@ -462,7 +488,7 @@
   <section class="cta">
     <div class="container cta-inner reveal">
       <h2>Ready to transform your space?</h2>
-      <a href="contact.html" class="btn btn-black">Get in touch</a>
+      <a href="booking.html" class="btn btn-black">Get a Free Consultation</a>
     </div>
   </section>
 </main>
@@ -516,7 +542,7 @@
     <div class="footer-action-row reveal" style="--d:.15s">
       <div class="footer-buttons">
         <a href="tel:+971527689121" class="btn btn-ghost">Call Us</a>
-        <a href="contact.html" class="btn btn-yellow">Book a Free Consultation</a>
+        <a href="contact.html" class="btn btn-yellow">Get a Free Quote</a>
       </div>
 
       <div class="footer-circles">
